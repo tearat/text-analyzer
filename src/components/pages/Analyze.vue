@@ -7,10 +7,10 @@
 
     <hr>
 
+    <p>Обычных слов в базе: {{ common_words.length }}</p>
     <div v-if="show_statistics">
         <p>Всего слов: {{ words.length }}</p>
         <p>Уникальных слов: {{ unique_words.length }}</p>
-        <p>Обычных слов: {{ common_words.length }}</p>
         <p v-if="words">Уникальность: {{ (unique_words.length / words.length * 100) }}%</p>
     </div>
 
@@ -35,8 +35,7 @@
 
     <div class="loading" v-if="loading">
         <div class="box">
-            <h2>Подождите секунду</h2>
-            <p>Это займёт не больше пары минут</p>
+            <h2>{{ loading_message }}</h2>
         </div>
     </div>
 
@@ -60,7 +59,8 @@ export default {
             show_unique: false,
             show_statistics: false,
             changed: false,
-            loading: true
+            loading: false,
+            loading_message: ''
         }
     },
     methods: {
@@ -125,6 +125,8 @@ export default {
         },
         load_common_words() {
             var that = this;
+            that.loading = true
+            that.loading_message = 'Загружаю список слов'
             $.ajax({
                 url: '/app/db.php',
                 data: {
@@ -161,6 +163,7 @@ export default {
         save() {
             var that = this;
             that.loading = true
+            that.loading_message = `Добавляю в базу новые слова (${that.new_common_words.length})`
             $.ajax({
                 url: '/app/db.php',
                 method: 'post',
