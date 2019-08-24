@@ -2,7 +2,7 @@
 <div class="container">
     <div class="form">
         <textarea v-model="text"></textarea>
-        <button @click="analyze">Анализ</button>
+        <button @click="analyzeWrapper">Анализ</button>
     </div>
 
     <hr>
@@ -64,8 +64,19 @@ export default {
         }
     },
     methods: {
+        analyzeWrapper() {
+            var that = this;
+
+            that.loading = true
+            that.loading_message = 'Провожу анализ текста'
+
+            setTimeout(function(){
+                that.analyze()
+            }, 50);
+        },
         analyze() {
             var that = this;
+
             this.unique_words = []
             this.words = this.text.split((/[\s\n\-]+/));
             this.words.forEach(function(word, index) {
@@ -118,6 +129,8 @@ export default {
             that.show_unique = true
             that.show_statistics = true
 
+            that.loading = false
+
             // console.log("unique_words:", this.unique_words);
             // console.log("Всего слов: ", this.words.length);
             // console.log("Уникальных слов: ", this.unique_words.length);
@@ -134,16 +147,7 @@ export default {
                 },
                 method: 'get',
                 success: function(data) {
-                    // console.log('loaded')
-                    // console.log(typeof data)
-                    // console.log(data)
-                    // if ( data == 'null' ) {
-                    //     console.log('null')
-                    // } else {
-                    //     console.log('not null')
-                    // }
                     that.common_words = (data != 'null') ? JSON.parse(data) : []
-                    // that.show_common = true
                     that.loading = false
                 }
             });
@@ -180,7 +184,6 @@ export default {
             });
         },
         refresh() {
-            this.loading = true
             this.load_common_words()
         }
     },
