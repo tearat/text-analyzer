@@ -1,0 +1,38 @@
+{
+  "name": "textanal.ar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack-dev-server --hot --watch",
+    "buildwatch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teraaret/text-analyzer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teraaret/text-analyzer/issues"
+  },
+  "homepage": "https://github.com/teraaret/text-analyzer#readme",
+  "dependencies": {
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.6",
+    "webpack-cli": "^3.3.3",
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "css-loader": "^2.1.1",
+    "file-loader": "^4.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "vue-loader": "^14.2.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.33.0",
+    "webpack-dev-server": "^3.7.1"
+  }
+}
